@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/components/custom_text_form_field.dart';
+import 'package:flutter_uber_eats/common/views/splash_screen.dart';
 import 'package:flutter_uber_eats/user/views/login_screen.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'NotoSans',
       ),
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

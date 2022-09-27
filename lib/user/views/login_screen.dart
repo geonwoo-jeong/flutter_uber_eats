@@ -3,8 +3,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_uber_eats/common/components/custom_text_form_field.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
+import 'package:flutter_uber_eats/common/constraints/data.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
 import 'package:flutter_uber_eats/common/views/root_tab.dart';
 
@@ -76,6 +78,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     );
+
+                    final refreshToken = resp.data['refreshToken'];
+                    final accessToken = resp.data['accessToken'];
+
+                    await storage.write(
+                        key: REFRESH_TOKEN_KEY, value: refreshToken);
+                    await storage.write(
+                        key: ACCESS_TOKEN_KEY, value: accessToken);
 
                     Navigator.of(context).push(
                       MaterialPageRoute(
