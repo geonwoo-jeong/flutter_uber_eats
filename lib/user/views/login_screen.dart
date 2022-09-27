@@ -1,13 +1,33 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/components/custom_text_form_field.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
+import 'package:flutter_uber_eats/common/views/root_tab.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String username = '';
+  String password = '';
+
+  @override
   Widget build(BuildContext context) {
+    final dio = Dio();
+
+    const emulatorIp = '10.0.0.2:3000';
+    const simulatorIp = '127.0.0.1:3000';
+
+    final ip = Platform.isIOS ? simulatorIp : emulatorIp;
+
     return DefaultLayout(
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -28,25 +48,59 @@ class LoginScreen extends StatelessWidget {
                 ),
                 CustomTextFormField(
                   hintText: '이메일을 입역해주세요',
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    username = value;
+                  },
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextFormField(
                   hintText: '패스워드를 입력해주세요',
-                  onChanged: (String value) {},
+                  onChanged: (String value) {
+                    password = value;
+                  },
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final rawString = '$username:$password';
+
+                    Codec<String, String> stringToBase64 = utf8.fuse(base64);
+
+                    String token = stringToBase64.encode(rawString);
+
+                    final resp = await dio.post(
+                      'http://$ip/auth/login',
+                      options: Options(
+                        headers: {
+                          'authorization': 'Basic $token',
+                        },
+                      ),
+                    );
+
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => RootTab(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
-                    primary: PRIMARY_COLOR,
+                    backgroundColor: PRIMARY_COLOR,
                   ),
                   child: Text('로그인'),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    // final resp = await dio.post(
+                    //   'http://$ip/auth/token',
+                    //   options: Options(
+                    //     headers: {
+                    //       'authorization': 'Bearer $token',
+                    //     },
+                    //   ),
+                    // );
+                  },
                   style: TextButton.styleFrom(
-                    primary: Colors.black,
+                    backgroundColor: Colors.black,
                   ),
                   child: Text(
                     '회원가입',
