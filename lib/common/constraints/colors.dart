@@ -2,7 +2,7 @@
 
 const PRIMARY_COLOR = Color(0xFF22A45D);
 
-const BODY_TEXT_COLOR = Color(0xFF68686);
+const BODY_TEXT_COLOR = Color(0xFF868686);
 
 const INPUT_BACKGROUND_COLOR = Color(0xFFFBFBFB);
 
