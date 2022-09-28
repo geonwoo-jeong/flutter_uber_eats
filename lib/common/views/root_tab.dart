@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
+import 'package:flutter_uber_eats/common/restaurants/views/restaurant_screen.dart';
 
 class RootTab extends StatefulWidget {
   const RootTab({Key? key}) : super(key: key);
@@ -71,11 +72,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         physics: const NeverScrollableScrollPhysics(),
         controller: controller,
         children: [
-          Center(
-            child: Container(
-              child: Text('HOME'),
-            ),
-          ),
+          RestaurantScreen(),
           Center(
             child: Container(
               child: Text('FOOD'),
