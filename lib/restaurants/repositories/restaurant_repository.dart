@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:flutter_uber_eats/restaurants/models/restaurant_detail_model.dart';
 import 'package:retrofit/http.dart';
 
@@ -13,6 +13,9 @@ abstract class RestaurantRepository {
   // paginate();
 
   @GET('/{id}')
+  @Headers(
+    {'accessToken': 'true'},
+  )
   Future<RestaurantDetailModel> getRestaurantDetail({
     @Path() required String id,
   });
