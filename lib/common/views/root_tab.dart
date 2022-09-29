@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
-import 'package:flutter_uber_eats/common/restaurants/views/restaurant_screen.dart';
+
+import '../../restaurants/views/restaurant_screen.dart';
 
 class RootTab extends StatefulWidget {
   const RootTab({Key? key}) : super(key: key);

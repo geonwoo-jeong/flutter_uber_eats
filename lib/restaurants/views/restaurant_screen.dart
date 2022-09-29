@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/constraints/data.dart';
-import 'package:flutter_uber_eats/common/restaurants/components/restaurant_card.dart';
-import 'package:flutter_uber_eats/common/restaurants/models/restaurant_model.dart';
-import 'package:flutter_uber_eats/common/restaurants/views/restaurant_detail_screen.dart';
+import 'package:flutter_uber_eats/restaurants/views/restaurant_detail_screen.dart';
+
+import '../components/restaurant_card.dart';
+import '../models/restaurant_model.dart';
 
 class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({Key? key}) : super(key: key);

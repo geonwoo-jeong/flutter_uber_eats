@@ -1,6 +1,4 @@
-import 'dart:ffi';
-
-import '../../constraints/data.dart';
+import '../../common/constraints/data.dart';
 
 enum RestaurantPriceRange {
   expensive,

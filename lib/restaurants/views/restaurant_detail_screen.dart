@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
-import 'package:flutter_uber_eats/common/restaurants/components/restaurant_card.dart';
+import 'package:flutter_uber_eats/products/components/product_card.dart';
+
+import '../components/restaurant_card.dart';
 
 class RestaurantDetailScreen extends StatelessWidget {
   const RestaurantDetailScreen({Key? key}) : super(key: key);
@@ -20,6 +22,10 @@ class RestaurantDetailScreen extends StatelessWidget {
             deliveryFee: 3600,
             ratings: 4.76,
             isDetail: true,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ProductCard(),
           )
         ],
       ),

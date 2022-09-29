@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
-import 'package:flutter_uber_eats/common/restaurants/models/restaurant_model.dart';
+import 'package:flutter_uber_eats/restaurants/models/restaurant_model.dart';
 
 class RestaurantCard extends StatelessWidget {
   final Widget image;
