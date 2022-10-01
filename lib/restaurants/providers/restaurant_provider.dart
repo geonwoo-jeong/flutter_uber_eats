@@ -106,7 +106,8 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
       } else {
         state = resp;
       }
-    } catch(e) {
+    } catch (e) {
       state = CursorPaginationError(message: 'Fetching fail');
     }
+  }
 }
