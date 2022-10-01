@@ -5,6 +5,18 @@ import 'package:flutter_uber_eats/restaurants/models/restaurant_model.dart';
 
 import '../repositories/restaurant_repository.dart';
 
+final restaurantDetailProvider = Provider.family<RestaurantModel?, String>(
+  (ref, id) {
+    final state = ref.watch(restaurantProvider);
+
+    if (state is! CursorPagination<RestaurantModel>) {
+      return null;
+    }
+
+    return state.data.firstWhere((element) => element.id == id);
+  },
+);
+
 final restaurantProvider =
     StateNotifierProvider<RestaurantStateNotifier, CursorPaginationBase>((ref) {
   final repository = ref.watch(restaurantRepositoryProvider);

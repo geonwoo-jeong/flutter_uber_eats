@@ -1,15 +1,10 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_uber_eats/common/constraints/data.dart';
-import 'package:flutter_uber_eats/common/dio/dio.dart';
 import 'package:flutter_uber_eats/common/models/cursor_pagination_model.dart';
 import 'package:flutter_uber_eats/restaurants/providers/restaurant_provider.dart';
-import 'package:flutter_uber_eats/restaurants/repositories/restaurant_repository.dart';
 import 'package:flutter_uber_eats/restaurants/views/restaurant_detail_screen.dart';
 
 import '../components/restaurant_card.dart';
-import '../models/restaurant_model.dart';
 
 class RestaurantScreen extends ConsumerStatefulWidget {
   const RestaurantScreen({Key? key}) : super(key: key);
