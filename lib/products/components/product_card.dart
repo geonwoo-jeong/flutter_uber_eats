@@ -49,7 +49,7 @@ class ProductCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -58,7 +58,7 @@ class ProductCard extends StatelessWidget {
                   detail,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: BODY_TEXT_COLOR,
                     fontSize: 14.0,
                   ),
@@ -66,7 +66,7 @@ class ProductCard extends StatelessWidget {
                 Text(
                   '$price',
                   textAlign: TextAlign.right,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: PRIMARY_COLOR,
                     fontSize: 12.0,
                     fontWeight: FontWeight.w500,

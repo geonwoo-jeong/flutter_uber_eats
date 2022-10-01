@@ -1,14 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_uber_eats/common/constraints/data.dart';
-import 'package:flutter_uber_eats/common/dio/dio.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
 import 'package:flutter_uber_eats/products/components/product_card.dart';
 import 'package:flutter_uber_eats/restaurants/models/restaurant_detail_model.dart';
 import 'package:flutter_uber_eats/restaurants/models/restaurant_model.dart';
 import 'package:flutter_uber_eats/restaurants/providers/restaurant_provider.dart';
-import 'package:flutter_uber_eats/restaurants/repositories/restaurant_repository.dart';
+import 'package:skeletons/skeletons.dart';
 
 import '../components/restaurant_card.dart';
 
@@ -51,10 +48,108 @@ class _RestaurantDetailScreenState
       child: CustomScrollView(
         slivers: [
           renderTop(model: state),
+          if (state is! RestaurantDetailModel) renderLoading(),
           if (state is RestaurantDetailModel) renderLabel(),
           if (state is RestaurantDetailModel)
             renderProducts(products: state.products),
         ],
+      ),
+    );
+  }
+
+  SliverPadding renderLoading() {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 16.0,
+        horizontal: 16.0,
+      ),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(
+          [
+            Padding(
+              padding: const EdgeInsets.only(
+                bottom: 32.0,
+              ),
+              child: SkeletonParagraph(
+                style: const SkeletonParagraphStyle(
+                  lines: 5,
+                  padding: EdgeInsets.zero,
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: const [
+                    SkeletonAvatar(
+                      style: SkeletonAvatarStyle(
+                        width: 110,
+                        height: 110,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 16.0),
+                Expanded(
+                  child: Column(
+                    children: [
+                      const SkeletonLine(
+                        style: SkeletonLineStyle(
+                            height: 18.0,
+                            width: 80.0,
+                            padding: EdgeInsets.zero,
+                            alignment: AlignmentDirectional.topStart),
+                      ),
+                      SkeletonParagraph(
+                        style: const SkeletonParagraphStyle(
+                          lines: 2,
+                          padding: EdgeInsets.only(top: 16.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 16.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: const [
+                    SkeletonAvatar(
+                      style: SkeletonAvatarStyle(
+                        width: 110,
+                        height: 110,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 16.0),
+                Expanded(
+                  child: Column(
+                    children: [
+                      const SkeletonLine(
+                        style: SkeletonLineStyle(
+                            height: 18.0,
+                            width: 80.0,
+                            padding: EdgeInsets.zero,
+                            alignment: AlignmentDirectional.topStart),
+                      ),
+                      SkeletonParagraph(
+                        style: const SkeletonParagraphStyle(
+                          lines: 2,
+                          padding: EdgeInsets.only(top: 16.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -71,7 +166,7 @@ class _RestaurantDetailScreenState
   }
 
   SliverPadding renderLabel() {
-    return SliverPadding(
+    return const SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       sliver: SliverToBoxAdapter(
         child: Text(
