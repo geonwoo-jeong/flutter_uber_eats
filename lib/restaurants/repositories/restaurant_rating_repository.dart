@@ -19,6 +19,7 @@ final restaurantRatingRepositoryProvider =
       baseUrl: 'http://$ip/restaurant/$id/rating');
 });
 
+// http://ip/restaurant/:rid/rating
 @RestApi()
 abstract class RestaurantRatingRepository
     implements IBasePaginationRepository<RatingModel> {
