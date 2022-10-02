@@ -30,6 +30,26 @@ class _PaginationListViewState<T extends IModelWithId>
   final ScrollController controller = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    controller.addListener(listener);
+  }
+
+  void listener() {
+    PaginationUtils.paginate(
+      controller: controller,
+      provider: ref.read(widget.provider.notifier),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.removeListener(listener);
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final state = ref.watch(widget.provider);
 
@@ -92,7 +112,6 @@ class _PaginationListViewState<T extends IModelWithId>
               pItem,
             );
           },
-
           separatorBuilder: (_, index) {
             return const SizedBox(height: 16.0);
           }),

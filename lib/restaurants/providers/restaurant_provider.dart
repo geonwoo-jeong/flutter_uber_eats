@@ -1,6 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_uber_eats/common/models/cursor_pagination_model.dart';
-import 'package:flutter_uber_eats/common/models/pagination_params.dart';
 import 'package:flutter_uber_eats/common/providers/pagination_provider.dart';
 import 'package:flutter_uber_eats/restaurants/models/restaurant_model.dart';
 
@@ -14,7 +14,7 @@ final restaurantDetailProvider = Provider.family<RestaurantModel?, String>(
       return null;
     }
 
-    return state.data.firstWhere((element) => element.id == id);
+    return state.data.firstWhereOrNull((element) => element.id == id);
   },
 );
 
@@ -48,12 +48,21 @@ class RestaurantStateNotifier
 
     final resp = await repository.getRestaurantDetail(id: id);
 
-    state = pState.copyWith(
-      data: pState.data
-          .map<RestaurantModel>(
-            (e) => e.id == id ? resp : e,
-          )
-          .toList(),
-    );
+    if (pState.data.where((e) => e.id == id).isEmpty) {
+      state = pState.copyWith(
+        data: <RestaurantModel>[
+          ...pState.data,
+          resp,
+        ],
+      );
+    } else {
+      state = pState.copyWith(
+        data: pState.data
+            .map<RestaurantModel>(
+              (e) => e.id == id ? resp : e,
+            )
+            .toList(),
+      );
+    }
   }
 }
