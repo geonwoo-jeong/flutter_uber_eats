@@ -1,3 +1,4 @@
+import 'package:flutter_uber_eats/common/models/model_with_id.dart';
 import 'package:flutter_uber_eats/common/utils/data_utils.dart';
 import 'package:flutter_uber_eats/user/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -5,7 +6,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'rating_model.g.dart';
 
 @JsonSerializable()
-class RatingModel {
+class RatingModel implements IModelWithId {
+  @override
   final String id;
   final UserModel user;
   final int rating;
