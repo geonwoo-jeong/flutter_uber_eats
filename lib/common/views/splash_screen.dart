@@ -6,7 +6,8 @@ import 'package:flutter_uber_eats/common/constraints/data.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
 import 'package:flutter_uber_eats/common/secure_storage/secure_storage.dart';
 import 'package:flutter_uber_eats/common/views/root_tab.dart';
-import 'package:flutter_uber_eats/user/views/login_screen.dart';
+
+import '../../users/views/login_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
