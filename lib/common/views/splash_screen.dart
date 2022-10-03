@@ -10,6 +10,8 @@ import 'package:flutter_uber_eats/common/views/root_tab.dart';
 import '../../users/views/login_screen.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
+  static String get routeName => 'splash';
+
   const SplashScreen({Key? key}) : super(key: key);
 
   @override

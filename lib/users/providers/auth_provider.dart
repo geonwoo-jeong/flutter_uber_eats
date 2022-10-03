@@ -2,8 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_uber_eats/common/views/root_tab.dart';
+import 'package:flutter_uber_eats/common/views/splash_screen.dart';
+import 'package:flutter_uber_eats/restaurants/views/restaurant_detail_screen.dart';
 import 'package:flutter_uber_eats/users/models/user_model.dart';
 import 'package:flutter_uber_eats/users/providers/user_me_provider.dart';
+import 'package:flutter_uber_eats/users/views/login_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final authProvider = ChangeNotifierProvider<AuthProvider>((ref) {
@@ -22,6 +26,32 @@ class AuthProvider extends ChangeNotifier {
       }
     });
   }
+
+  List<GoRoute> get routes => [
+        GoRoute(
+          path: '/',
+          name: RootTab.routeName,
+          builder: (_, __) => const RootTab(),
+          routes: [
+            GoRoute(
+              path: 'restaurant/:rid',
+              builder: (_, state) => RestaurantDetailScreen(
+                id: state.params['rid']!,
+              ),
+            )
+          ],
+        ),
+        GoRoute(
+          path: '/splash',
+          name: SplashScreen.routeName,
+          builder: (_, __) => const SplashScreen(),
+        ),
+        GoRoute(
+          path: '/login',
+          name: LoginScreen.routeName,
+          builder: (_, __) => const LoginScreen(),
+        ),
+      ];
 
   // SplashScreen
   String? redirectLogic(GoRouterState state) {
