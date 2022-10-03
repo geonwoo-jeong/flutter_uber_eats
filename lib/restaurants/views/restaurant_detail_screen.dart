@@ -13,7 +13,9 @@ import 'package:flutter_uber_eats/restaurants/models/restaurant_detail_model.dar
 import 'package:flutter_uber_eats/restaurants/models/restaurant_model.dart';
 import 'package:flutter_uber_eats/restaurants/providers/restaurant_provider.dart';
 import 'package:flutter_uber_eats/restaurants/providers/restaurant_rating_provider.dart';
+import 'package:flutter_uber_eats/restaurants/views/basket_screen.dart';
 import 'package:flutter_uber_eats/users/providers/basket_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:skeletons/skeletons.dart';
 
 import '../components/restaurant_card.dart';
@@ -70,7 +72,9 @@ class _RestaurantDetailScreenState
     return DefaultLayout(
       title: '불타는 떡볶이',
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.pushNamed(BasketScreen.routeName);
+        },
         backgroundColor: PRIMARY_COLOR,
         child: Badge(
           showBadge: basket.isNotEmpty,
