@@ -3,7 +3,7 @@ import 'package:flutter_uber_eats/users/providers/auth_provider.dart';
 import 'package:go_router/go_router.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
-  final provider = ref.watch(authProvider);
+  final provider = ref.read(authProvider);
 
   return GoRouter(
     routes: provider.routes,

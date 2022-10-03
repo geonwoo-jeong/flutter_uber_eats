@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
 import 'package:flutter_uber_eats/products/views/product_screen.dart';
+import 'package:flutter_uber_eats/users/views/profile_screen.dart';
 
 import '../../restaurants/views/restaurant_screen.dart';
 
@@ -76,18 +77,14 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         physics: const NeverScrollableScrollPhysics(),
         controller: controller,
         children: [
-          RestaurantScreen(),
-          ProductScreen(),
+          const RestaurantScreen(),
+          const ProductScreen(),
           Center(
             child: Container(
-              child: Text('ORDER'),
+              child: const Text('ORDER'),
             ),
           ),
-          Center(
-            child: Container(
-              child: Text('PROFILE'),
-            ),
-          ),
+          const ProfileScreen(),
         ],
       ),
     );
