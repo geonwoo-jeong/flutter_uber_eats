@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
 import 'package:flutter_uber_eats/common/layouts/default_layout.dart';
+import 'package:flutter_uber_eats/orders/providers/order_provider.dart';
+import 'package:flutter_uber_eats/orders/views/order_done_screen.dart';
 import 'package:flutter_uber_eats/users/providers/basket_provider.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../products/components/product_card.dart';
 
@@ -114,7 +117,20 @@ class BasketScreen extends ConsumerWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        final resp =
+                            await ref.read(orderProvider.notifier).postOrder();
+
+                        if (resp) {
+                          context.goNamed(OrderDoneScreen.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('결제 실패!'),
+                            ),
+                          );
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: PRIMARY_COLOR,
                       ),

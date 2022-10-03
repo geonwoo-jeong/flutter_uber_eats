@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_uber_eats/common/views/root_tab.dart';
 import 'package:flutter_uber_eats/common/views/splash_screen.dart';
+import 'package:flutter_uber_eats/orders/views/order_done_screen.dart';
 import 'package:flutter_uber_eats/restaurants/views/basket_screen.dart';
 import 'package:flutter_uber_eats/restaurants/views/restaurant_detail_screen.dart';
 import 'package:flutter_uber_eats/users/models/user_model.dart';
@@ -48,6 +49,11 @@ class AuthProvider extends ChangeNotifier {
           path: '/basket',
           name: BasketScreen.routeName,
           builder: (_, __) => const BasketScreen(),
+        ),
+        GoRoute(
+          path: '/order_done',
+          name: OrderDoneScreen.routeName,
+          builder: (_, __) => const OrderDoneScreen(),
         ),
         GoRoute(
           path: '/splash',
