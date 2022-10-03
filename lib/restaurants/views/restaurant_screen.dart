@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_uber_eats/common/components/pagination_list_view.dart';
 import 'package:flutter_uber_eats/restaurants/providers/restaurant_provider.dart';
 import 'package:flutter_uber_eats/restaurants/views/restaurant_detail_screen.dart';
+import 'package:go_router/go_router.dart';
 
 import '../components/restaurant_card.dart';
 
@@ -15,13 +16,9 @@ class RestaurantScreen extends StatelessWidget {
       itemBuilder: <RestaurantModel>(_, index, model) {
         return GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => RestaurantDetailScreen(
-                  id: model.id,
-                ),
-              ),
-            );
+            context.goNamed(RestaurantDetailScreen.routeName, params: {
+              'rid': model.id,
+            });
           },
           child: RestaurantCard.fromModel(model: model),
         );

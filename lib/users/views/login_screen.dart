@@ -83,7 +83,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.black,
                   ),
-                  child: Text(
+                  child: const Text(
                     '회원가입',
                   ),
                 )
