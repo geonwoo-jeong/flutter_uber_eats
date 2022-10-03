@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_uber_eats/common/constraints/colors.dart';
@@ -144,5 +143,9 @@ class BasketScreen extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<bool> onPressed(BuildContext context, Ref ref) async {
+    return await ref.read(orderProvider.notifier).postOrder();
   }
 }
