@@ -3,6 +3,11 @@ import 'package:flutter_uber_eats/products/models/product_model.dart';
 import 'package:flutter_uber_eats/users/models/basket_item_model.dart';
 import 'package:collection/collection.dart';
 
+final basketProvider =
+    StateNotifierProvider<BasketProvider, List<BasketItemModel>>((ref) {
+  return BasketProvider();
+});
+
 class BasketProvider extends StateNotifier<List<BasketItemModel>> {
   BasketProvider() : super([]);
 
