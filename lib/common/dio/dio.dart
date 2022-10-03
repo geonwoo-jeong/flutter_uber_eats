@@ -3,23 +3,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_uber_eats/common/constraints/data.dart';
 import 'package:flutter_uber_eats/common/secure_storage/secure_storage.dart';
+import 'package:flutter_uber_eats/users/providers/auth_provider.dart';
 
 final dioProvider = Provider<Dio>((ref) {
-    final dio = Dio();
-    final storage = ref.watch(secureStorageProvider);
+  final dio = Dio();
+  final storage = ref.watch(secureStorageProvider);
 
-    dio.interceptors.add(
-      CustomInterceptor(storage: storage)
-    );
+  dio.interceptors.add(CustomInterceptor(
+    storage: storage,
+    ref: ref,
+  ));
 
-    return dio;
+  return dio;
 });
 
 class CustomInterceptor extends Interceptor {
   final FlutterSecureStorage storage;
+  final Ref ref;
 
   CustomInterceptor({
     required this.storage,
+    required this.ref,
   });
 
   @override
@@ -47,7 +51,6 @@ class CustomInterceptor extends Interceptor {
 
     return super.onRequest(options, handler);
   }
-
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) async {
@@ -82,7 +85,8 @@ class CustomInterceptor extends Interceptor {
         final response = await dio.fetch(options);
 
         return handler.resolve(response);
-      } on DioError catch (e) {
+      } on DioError catch (err) {
+        ref.read(authProvider.notifier).logout();
         return handler.reject(err);
       }
     }
